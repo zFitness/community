@@ -30,8 +30,8 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String Callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request,
-                           HttpServletResponse response) {
+                           HttpServletRequest request
+                           ) {
         AccessTokenDTO dto = new AccessTokenDTO();
         dto.setCode(code);
         dto.setRedirect_uri(redirectURI);
