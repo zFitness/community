@@ -18,6 +18,9 @@
 [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-embedded-database-support)
 
 [菜鸟mysql教程](https://www.runoob.com/mysql/mysql-tutorial.html)
+
+[flyway文档](https://flywaydb.org/getstarted/firststeps/maven#adding-a-second-migration)
+
 ## 工具
 * idea
 * git

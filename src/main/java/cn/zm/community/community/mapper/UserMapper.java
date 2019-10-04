@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Select;
 public interface UserMapper {
     /**
      * 插入一条数据
+     *
      * @param user
      */
     @Insert("insert into user(account_id, name, token, gmt_create, gmt_modified)" +
@@ -21,6 +22,7 @@ public interface UserMapper {
 
     /**
      * 根据token查找用户
+     *
      * @param token
      * @return
      */
