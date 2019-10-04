@@ -10,3 +10,7 @@ body{
     float: right;
     margin-bottom: 15px;
 }
+
+.publish-left{
+    border-right: 1px solid #e6e6e6;
+}
