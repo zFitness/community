@@ -3,11 +3,13 @@ package cn.zm.community.community.mapper;
 import cn.zm.community.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 /**
  * @author zfitness
  */
 @Mapper
+@Component
 public interface QuestionMapper {
     /**
      * 创建一个问题

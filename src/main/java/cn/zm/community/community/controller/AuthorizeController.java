@@ -60,11 +60,12 @@ public class AuthorizeController {
                 user.setAccountId(String.valueOf(gitHubUser.getId()));
                 user.setGmtCreate(System.currentTimeMillis());
                 user.setGmtModified(user.getGmtCreate());
+                user.setAvatarUrl(gitHubUser.getAvatar_url());
+                System.out.println(user);
                 userMapper.insert(user);
                 Cookie cookie = new Cookie("token", token);
                 response.addCookie(cookie);
                 // 登录成功，
-
                 return "redirect:/";
             } else {
                 //登录失败

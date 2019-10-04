@@ -21,6 +21,7 @@
 
 [flyway文档](https://flywaydb.org/getstarted/firststeps/maven#adding-a-second-migration)
 
+lombok
 ## 工具
 * idea
 * git
