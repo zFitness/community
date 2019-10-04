@@ -10,6 +10,13 @@
 [github OAuth文档](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
 
 [okhttp 文档](https://square.github.io/okhttp/)
+
+[springboot-mybatis 文档](https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/index.html)
+
+[thymeleaf 文档](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)
+
+[Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-embedded-database-support)
+
 ## 工具
 * idea
 * git
