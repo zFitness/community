@@ -38,7 +38,8 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String Callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request
+                           HttpServletRequest request,
+                           HttpServletResponse response
     ) {
         AccessTokenDTO dto = new AccessTokenDTO();
         dto.setCode(code);
@@ -53,14 +54,17 @@ public class AuthorizeController {
 
             if (gitHubUser != null) {
                 User user = new User();
-                user.setToken(UUID.randomUUID().toString());
+                String token = UUID.randomUUID().toString();
+                user.setToken(token);
                 user.setName(gitHubUser.getLogin());
                 user.setAccountId(String.valueOf(gitHubUser.getId()));
                 user.setGmtCreate(System.currentTimeMillis());
                 user.setGmtModified(user.getGmtCreate());
                 userMapper.insert(user);
+                Cookie cookie = new Cookie("token", token);
+                response.addCookie(cookie);
                 // 登录成功，
-                request.getSession().setAttribute("user", gitHubUser);
+
                 return "redirect:/";
             } else {
                 //登录失败
