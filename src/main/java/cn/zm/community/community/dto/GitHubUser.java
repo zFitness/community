@@ -2,20 +2,31 @@ package cn.zm.community.community.dto;
 
 /**
  * GitHubUser 的实体类
+ *
  * @author zfitness
  */
 public class GitHubUser {
     private String name;
     private Long id;
     private String bio;
-    private String avatar_url;
+    private String avatarUrl;
 
-    public String getAvatar_url() {
-        return avatar_url;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setAvatar_url(String avatar_url) {
-        this.avatar_url = avatar_url;
+    @Override
+    public String toString() {
+        return "GitHubUser{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", bio='" + bio + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                '}';
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public String getLogin() {
@@ -42,13 +53,5 @@ public class GitHubUser {
         this.bio = bio;
     }
 
-    @Override
-    public String toString() {
-        return "GitHubUser{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", bio='" + bio + '\'' +
-                ", avatar_url='" + avatar_url + '\'' +
-                '}';
-    }
+
 }

@@ -14,6 +14,11 @@ import java.io.IOException;
  */
 @Component
 public class GitHubProvider {
+    /**
+     * 获取 AccessToken
+     * @param dto
+     * @return
+     */
     public String getAccessToken(AccessTokenDTO dto) {
         MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
@@ -49,6 +54,7 @@ public class GitHubProvider {
             String string = response.body().string();
             System.out.println(string);
             GitHubUser gitHubUser = JSON.parseObject(string, GitHubUser.class);
+            System.out.println(gitHubUser);
             return gitHubUser;
         } catch (IOException e) {
             e.printStackTrace();

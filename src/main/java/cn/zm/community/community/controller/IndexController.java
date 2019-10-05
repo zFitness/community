@@ -44,6 +44,9 @@ public class IndexController {
         }
 
         List<QuestionDTO> questions = questionService.findAll();
+        for (QuestionDTO question : questions) {
+            System.out.println("change" + question);
+        }
         model.addAttribute("questions", questions);
         System.out.println(questions);
         return "index";
