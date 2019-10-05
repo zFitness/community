@@ -21,7 +21,8 @@ body {
     height: 40px;
 }
 
-.img1 {
-    width: 40px;
-    height: 40px;
+.text-dsc {
+    font-size: 12px;
+    font-weight: normal;
+    color: #999
 }
