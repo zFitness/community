@@ -1,5 +1,6 @@
 package cn.zm.community.community.service;
 
+import cn.zm.community.community.dto.PaginationDTO;
 import cn.zm.community.community.dto.QuestionDTO;
 import cn.zm.community.community.mapper.QuestionMapper;
 import cn.zm.community.community.mapper.UserMapper;
@@ -33,5 +34,36 @@ public class QuestionService {
             questionDTOS.add(questionDTO);
         }
         return questionDTOS;
+    }
+
+    public PaginationDTO list(Integer page, Integer size) {
+        Integer totalCount = questionMapper.count();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        paginationDTO.setPagination(totalCount, page, size);
+
+        if (page < 1) {
+            page = 1;
+        }
+
+        if (page > paginationDTO.getTotalPage()) {
+            page = paginationDTO.getTotalPage();
+        }
+        //size*(page-1)
+        Integer offset = size * (page - 1);
+        List<Question> questions = questionMapper.list(offset, size);
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+
+
+        for (Question question : questions) {
+            User user = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question, questionDTO);
+            questionDTO.setUser(user);
+            questionDTOS.add(questionDTO);
+        }
+        paginationDTO.setQuestions(questionDTOS);
+
+
+        return paginationDTO;
     }
 }

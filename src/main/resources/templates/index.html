@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>community</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/community.css">
 
     </head>
@@ -58,7 +58,7 @@
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 publish-left">
                     <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 发现</h2>
                     <hr>
-                    <div th:each="question:${questions}">
+                    <div th:each="question:${pagination.getQuestions()}">
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
@@ -77,7 +77,36 @@
                             </div>
                         </div>
                     </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li th:if="${pagination.showFirstPage}">
+                                <a href="/?page=1" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li th:if="${pagination.showPrevious}">
+                                <a th:href="@{/(page=${pagination.page - 1})}" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
 
+                            <li th:each="page : ${pagination.pages}" th:class="${pagination.page == page}?'active':''">
+                                <a th:text="${page}" th:href="@{/(page=${page})}">
+                                </a>
+                            </li>
+
+                            <li th:if="${pagination.showNext}">
+                                <a th:href="@{/(page=${pagination.page + 1})}" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                            <li th:if="${pagination.showEndPage}">
+                                <a href="/?page=1" aria-label="Previous">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
 
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
@@ -88,8 +117,7 @@
                 </div>
             </div>
         </div>
-
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
     </body>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </html>

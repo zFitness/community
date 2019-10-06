@@ -1,11 +1,13 @@
 package cn.zm.community.community.controller;
 
+import cn.zm.community.community.dto.PaginationDTO;
 import cn.zm.community.community.dto.QuestionDTO;
 import cn.zm.community.community.mapper.QuestionMapper;
 import cn.zm.community.community.mapper.UserMapper;
 import cn.zm.community.community.model.Question;
 import cn.zm.community.community.model.User;
 import cn.zm.community.community.service.QuestionService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +30,9 @@ public class IndexController {
 
     @GetMapping({"/index", "/"})
     public String hello(HttpServletRequest request,
-                        Model model) {
+                        Model model,
+                        @RequestParam(name = "page", defaultValue = "1") Integer page,
+                        @RequestParam(name = "size", defaultValue = "5") Integer size) {
         Cookie[] cookies = request.getCookies();
         String token = null;
         User user = null;
@@ -43,12 +47,10 @@ public class IndexController {
             }
         }
 
-        List<QuestionDTO> questions = questionService.findAll();
-        for (QuestionDTO question : questions) {
-            System.out.println("change" + question);
-        }
-        model.addAttribute("questions", questions);
-        System.out.println(questions);
+        PaginationDTO pagination = questionService.list(page, size);
+
+        model.addAttribute("pagination", pagination);
+        System.out.println(pagination);
         return "index";
     }
 }
