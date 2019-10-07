@@ -48,4 +48,22 @@ public interface QuestionMapper {
      */
     @Select("select count(1) from question")
     Integer count();
+
+    /**
+     * 根据提问
+     * @param userId
+     * @param offset
+     * @param size
+     * @return
+     */
+    @Select("select * from question where creator = ${userId} limit #{offset}, #{size}")
+    List<Question> listByUserId(@Param("userId") Integer userId, @Param("offset") Integer offset, @Param("size") Integer size);
+
+    /**
+     * 查询
+     * @param userId
+     * @return
+     */
+    @Select("select count(1) from question where creator = ${userId}")
+    Integer countByUserId(@Param("userId") Integer userId);
 }
