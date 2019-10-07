@@ -24,8 +24,6 @@ import java.util.List;
 @Controller
 public class IndexController {
     @Autowired
-    private UserMapper mapper;
-    @Autowired
     private QuestionService questionService;
 
     @GetMapping({"/index", "/"})
@@ -33,19 +31,7 @@ public class IndexController {
                         Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
                         @RequestParam(name = "size", defaultValue = "5") Integer size) {
-        Cookie[] cookies = request.getCookies();
-        String token = null;
-        User user = null;
-        for (Cookie cookie : cookies) {
-            if ("token".equals(cookie.getName())) {
-                token = cookie.getValue();
-                user = mapper.findByToken(token);
-                if (user != null) {
-                    request.getSession().setAttribute("user", user);
-                }
-                break;
-            }
-        }
+
 
         PaginationDTO pagination = questionService.list(page, size);
 
