@@ -24,17 +24,25 @@ public class SessionInterceptor implements HandlerInterceptor {
         Cookie[] cookies = request.getCookies();
         String token = null;
         User user = null;
-        for (Cookie cookie : cookies) {
-            if ("token".equals(cookie.getName())) {
-                token = cookie.getValue();
-                user = mapper.findByToken(token);
-                if (user != null) {
-                    request.getSession().setAttribute("user", user);
+        //先判断cookies是否为空， 否则可能抛出空指针异常
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("token".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                    try {
+                        user = mapper.findByToken(token);
+                        if (user != null) {
+                            request.getSession().setAttribute("user", user);
 
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 }
-                break;
             }
         }
+
         return true;
     }
 

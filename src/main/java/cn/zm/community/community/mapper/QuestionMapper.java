@@ -1,5 +1,6 @@
 package cn.zm.community.community.mapper;
 
+import cn.zm.community.community.dto.QuestionDTO;
 import cn.zm.community.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -44,6 +45,7 @@ public interface QuestionMapper {
 
     /**
      * 查询总数
+     *
      * @return
      */
     @Select("select count(1) from question")
@@ -51,6 +53,7 @@ public interface QuestionMapper {
 
     /**
      * 根据提问
+     *
      * @param userId
      * @param offset
      * @param size
@@ -61,9 +64,19 @@ public interface QuestionMapper {
 
     /**
      * 查询
+     *
      * @param userId
      * @return
      */
     @Select("select count(1) from question where creator = ${userId}")
     Integer countByUserId(@Param("userId") Integer userId);
+
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
+    @Select("select * from question where id = ${id}")
+    Question findById(@Param("id") Integer id);
 }

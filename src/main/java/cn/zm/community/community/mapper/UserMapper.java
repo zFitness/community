@@ -37,4 +37,18 @@ public interface UserMapper {
     @Select("select * from user where id = #{id}")
     User findById(@Param("id") Integer creator);
 
+    /**
+     * d
+     * @param accountId
+     * @return
+     */
+    @Select("select * from user where account_id = #{accountId}")
+    User findByAccountId(@Param("accountId") String accountId);
+
+    /**
+     * 更新
+     * @param user
+     */
+    @Update("update user set name=#{name},token=#{token},gmt_modified=#{gmtModified},avatar_url=#{avatarUrl},bio=#{bio} where id=#{id}")
+    void update(User user);
 }
