@@ -1,79 +1,82 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>发布文章</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/community.css">
-</head>
-<body>
-    <div th:insert="navigation :: nav"></div>
+    <head>
+        <title>发布文章</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/css/community.css">
+    </head>
+    <body>
+        <div th:insert="navigation :: nav"></div>
 
-<div class="container-fluid main">
-    <div class="row">
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 publish-left">
-            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起</h2>
-            <hr>
-            <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
+        <div class="container-fluid main">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 publish-left">
+                    <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起</h2>
+                    <hr>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
 
-                <strong>如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问。</strong>
+                        <strong>如果你希望他人花 1 分钟来解答你的问题，还请耐心花 10 分钟完善你的提问。</strong>
 
-                补充完整的错误描述，如：
-                软件版本；
-                运行环境；
-                场景/上下文；
-                有用的信息（请使用代码块粘贴，以方便他人查看）；
-                相关查询请求；
-                错误日志；
-                代码块；
-            </div>
-            <form action="/publish" method="post">
-                <div class="form-group">
-                    <label for="title">问题标题（简单扼要）:</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="问题标题..." th:value="${title}">
-                </div>
-                <div class="form-group">
-                    <label for="description">问题补充 (必填，请参照右侧提示):</label>
-                    <textarea name="description" id="description" class="form-control" cols="30" rows="10" th:text="${description}"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="tag">添加标签:</label>
-                    <input type="text" class="form-control" name="tag" id="tag" placeholder="输入标签，以,隔开" th:value="${tag}">
-                </div>
-                <div class="container-fluid main">
-                    <div class="row">
-                        <div class="alert alert-danger alert-dismissible col-lg-9 col-md-12 col-sm-12 col-xs-12"
-                             role="alert" th:if="${error != null}">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <span th:text="${error}"></span>
-                        </div>
-                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" th:if="${error == null}"></div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                            <button type="submit"
-                                    class="btn btn-success btn-publish">发布
-                            </button>
-                        </div>
+                        补充完整的错误描述，如：
+                        软件版本；
+                        运行环境；
+                        场景/上下文；
+                        有用的信息（请使用代码块粘贴，以方便他人查看）；
+                        相关查询请求；
+                        错误日志；
+                        代码块；
                     </div>
+                    <form action="/publish" method="post">
+                        <input type="hidden" name="id" th:value="${id}">
+                        <div class="form-group">
+                            <label for="title">问题标题（简单扼要）:</label>
+                            <input type="text" class="form-control" name="title" id="title" placeholder="问题标题..." th:value="${title}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">问题补充 (必填，请参照右侧提示):</label>
+                            <textarea name="description" id="description" class="form-control" cols="30" rows="10"
+                                      th:text="${description}"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tag">添加标签:</label>
+                            <input type="text" class="form-control" name="tag" id="tag" placeholder="输入标签，以,隔开" th:value="${tag}">
+                        </div>
+                        <div class="container-fluid main">
+                            <div class="row">
+                                <div class="alert alert-danger alert-dismissible col-lg-9 col-md-12 col-sm-12 col-xs-12"
+                                     role="alert" th:if="${error != null}">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <span th:text="${error}"></span>
+                                </div>
+                                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" th:if="${error == null}"></div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="submit"
+                                            class="btn btn-success btn-publish">发布
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
                 </div>
-
-            </form>
-
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <h3>问题发起指南</h3>
+                    • 问题标题: 请用精简的语言描述您发布的问题，不超过25字 <br>
+                    • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料： <br>
+                    • 选择标签： 输入标签，用逗号隔开。 <br>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>问题发起指南</h3>
-            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字 <br>
-            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料： <br>
-            • 选择标签： 输入标签，用逗号隔开。 <br>
-        </div>
-    </div>
-</div>
 
-<script src="js/jquery-3.4.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
+        <script src="/js/jquery-3.4.1.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
 </html>
