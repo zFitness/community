@@ -11,6 +11,7 @@
     <groupId>cn.zm.community</groupId>
     <artifactId>community</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>community</name>
     <description>my community</description>
 
@@ -29,10 +30,16 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <!-- springboot 集成mybatis 依赖 -->
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis.spring.boot</groupId>-->
+<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+<!--            <version>2.1.0</version>-->
+<!--        </dependency>-->
+        <!-- 集成mybatis-plus-->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.0</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.2.0</version>
         </dependency>
         <!-- spring jdbc-->
         <dependency>
@@ -80,6 +87,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
             </plugin>
             <plugin>
                 <groupId>org.flywaydb</groupId>
@@ -99,6 +107,8 @@
                 </dependencies>
             </plugin>
         </plugins>
+<!--        &lt;!&ndash; 项目名称 &ndash;&gt;-->
+<!--        <finalName>community</finalName>-->
     </build>
 
 </project>

@@ -6,6 +6,11 @@ import cn.zm.community.community.mapper.QuestionMapper;
 import cn.zm.community.community.mapper.UserMapper;
 import cn.zm.community.community.model.Question;
 import cn.zm.community.community.model.User;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +29,10 @@ public class QuestionService {
     private QuestionMapper questionMapper;
 
     public List<QuestionDTO> findAll() {
-        List<Question> questions = questionMapper.findAll();
+        List<Question> questions = questionMapper.selectList(null);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -36,10 +41,15 @@ public class QuestionService {
         return questionDTOS;
     }
 
+    /**
+     * @param page
+     * @param size
+     * @return
+     */
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         int totalPage;
-        Integer totalCount = questionMapper.count();
+        Integer totalCount = questionMapper.selectCount(null);
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
 
@@ -57,12 +67,15 @@ public class QuestionService {
         paginationDTO.setPagination(totalPage, page);
         //size*(page-1)
         Integer offset = size * (page - 1);
-        List<Question> questions = questionMapper.list(offset, size);
+        // 分页
+        Page<Question> questionPage = new Page<>(page, size);
+        IPage<Question> questionIPage = questionMapper.selectPage(questionPage, null);
+        List<Question> questions = questionIPage.getRecords();
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
 
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -78,7 +91,9 @@ public class QuestionService {
 
         PaginationDTO paginationDTO = new PaginationDTO();
         int totalPage;
-        Integer totalCount = questionMapper.countByUserId(userId);
+        LambdaQueryWrapper<Question> lambda = new QueryWrapper<Question>().lambda();
+        lambda.eq(Question::getCreator, userId);
+        Integer totalCount = questionMapper.selectCount(lambda);
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
 
@@ -98,12 +113,16 @@ public class QuestionService {
 
         //size*(page-1)
         Integer offset = size * (page - 1);
-        List<Question> questions = questionMapper.listByUserId(userId, offset, size);
+        LambdaQueryWrapper<Question> lambdaQuery = Wrappers.<Question>lambdaQuery();
+        lambdaQuery.eq(Question::getCreator, userId);
+        Page<Question> questionPage = new Page<>(page, size);
+        IPage<Question> questionIPage = questionMapper.selectPage(questionPage, lambdaQuery);
+        List<Question> questions = questionIPage.getRecords();
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
 
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -116,8 +135,8 @@ public class QuestionService {
     }
 
     public QuestionDTO getById(Integer id) {
-        Question question = questionMapper.findById(id);
-        User user = userMapper.findById(question.getCreator());
+        Question question = questionMapper.selectById(id);
+        User user = userMapper.selectById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
         questionDTO.setUser(user);
@@ -133,13 +152,13 @@ public class QuestionService {
         //如果没有id
         if (question.getId() == null) {
             //创建问题
-            questionMapper.create(question);
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
+            questionMapper.insert(question);
         } else {
             //更新问题
             question.setGmtModified(System.currentTimeMillis());
-            questionMapper.update(question);
+            questionMapper.updateById(question);
         }
     }
 

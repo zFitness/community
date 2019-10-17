@@ -2,6 +2,8 @@ package cn.zm.community.community.interceptor;
 
 import cn.zm.community.community.mapper.UserMapper;
 import cn.zm.community.community.model.User;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -30,7 +32,9 @@ public class SessionInterceptor implements HandlerInterceptor {
                 if ("token".equals(cookie.getName())) {
                     token = cookie.getValue();
                     try {
-                        user = mapper.findByToken(token);
+                        QueryWrapper<User> query = Wrappers.<User>query();
+                        query.eq("token", token);
+                        user = mapper.selectOne(query);
                         if (user != null) {
                             request.getSession().setAttribute("user", user);
 
