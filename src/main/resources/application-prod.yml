@@ -1,0 +1,18 @@
+# 数据源
+spring:
+  datasource:
+    # 8.0 的驱动使用cj的那个驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库地址， useSSL: 不使用安全套接字   serverTimeZone: 时区
+    url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC
+    username: root
+    password: wwwpsxiaoji
+
+
+# github OAuth 配置
+github:
+  client:
+    id: ee34371940f933c1bb71
+    secret: ee8deddf90a56d7ea4e1a1e79f922f1089e38dfa
+  redirect:
+    uri: http://zmblog.wang/community/callback

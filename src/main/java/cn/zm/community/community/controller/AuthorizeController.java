@@ -94,4 +94,9 @@ public class AuthorizeController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }

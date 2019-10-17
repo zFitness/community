@@ -41,6 +41,10 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
         <!-- spring jdbc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,7 +111,7 @@
                 </dependencies>
             </plugin>
         </plugins>
-<!--        &lt;!&ndash; 项目名称 &ndash;&gt;-->
+        <!-- 项目名称 -->
 <!--        <finalName>community</finalName>-->
     </build>
 
