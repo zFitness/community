@@ -1,5 +1,7 @@
 package cn.zm.community.community.service;
 
+import cn.zm.community.community.exception.CustomizeErrorCode;
+import cn.zm.community.community.exception.CustomizeException;
 import cn.zm.community.community.dto.PaginationDTO;
 import cn.zm.community.community.dto.QuestionDTO;
 import cn.zm.community.community.mapper.QuestionMapper;
@@ -69,7 +71,9 @@ public class QuestionService {
         Integer offset = size * (page - 1);
         // 分页
         Page<Question> questionPage = new Page<>(page, size);
-        IPage<Question> questionIPage = questionMapper.selectPage(questionPage, null);
+        QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("gmt_modified");
+        IPage<Question> questionIPage = questionMapper.selectPage(questionPage, queryWrapper);
         List<Question> questions = questionIPage.getRecords();
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
@@ -136,6 +140,9 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.selectById(id);
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         User user = userMapper.selectById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
@@ -158,7 +165,10 @@ public class QuestionService {
         } else {
             //更新问题
             question.setGmtModified(System.currentTimeMillis());
-            questionMapper.updateById(question);
+            int rows = questionMapper.updateById(question);
+            if (rows != 1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 

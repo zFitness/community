@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>community</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/community.css" th:href="@{/css/community.css}">
+
+  </head>
+  <body>
+    <div th:insert="navigation :: nav"></div>
+
+    <div class="container-fluid error">
+      <div class="row">
+        <div class="jumbotron">
+          <h1>出错了!!!</h1>
+          <p th:text="${errMsg}">服务器又出错了，杀个程序员祭天。</p>
+          <p>服务器又出错了，杀个程序员祭天。</p>
+          <p><a class="btn btn-primary" href="#" role="button" th:href="@{/}">回到首页</a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+  <script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</html>
