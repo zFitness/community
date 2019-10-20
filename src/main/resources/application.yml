@@ -8,4 +8,4 @@ server:
 # 选择不同环境的配置文件
 spring:
   profiles:
-    active: prod
+    active: dev

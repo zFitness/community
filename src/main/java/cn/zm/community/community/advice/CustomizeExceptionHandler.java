@@ -9,6 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 异常处理器， 出现异常跳转到指定页面
+ * @author zfitness
+ */
 @ControllerAdvice
 public class CustomizeExceptionHandler {
     /**

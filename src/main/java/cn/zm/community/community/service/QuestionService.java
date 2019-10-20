@@ -1,9 +1,9 @@
 package cn.zm.community.community.service;
 
-import cn.zm.community.community.exception.CustomizeErrorCode;
-import cn.zm.community.community.exception.CustomizeException;
 import cn.zm.community.community.dto.PaginationDTO;
 import cn.zm.community.community.dto.QuestionDTO;
+import cn.zm.community.community.exception.CustomizeErrorCode;
+import cn.zm.community.community.exception.CustomizeException;
 import cn.zm.community.community.mapper.QuestionMapper;
 import cn.zm.community.community.mapper.UserMapper;
 import cn.zm.community.community.model.Question;
@@ -172,4 +172,12 @@ public class QuestionService {
         }
     }
 
+    /**
+     * 增加阅读数
+     *
+     * @param id
+     */
+    public void incView(Integer id) {
+        questionMapper.incView(id);
+    }
 }
