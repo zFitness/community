@@ -90,7 +90,9 @@ public class PublishController {
         question.setDescription(description);
         question.setCreator(user.getId());
         question.setId(id);
+        System.out.println();
         System.out.println(question);
+        System.out.println();
         questionService.createOrUpdate(question);
 
 

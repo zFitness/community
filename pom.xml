@@ -11,7 +11,7 @@
     <groupId>cn.zm.community</groupId>
     <artifactId>community</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>community</name>
     <description>my community</description>
 
@@ -111,8 +111,8 @@
                 </dependencies>
             </plugin>
         </plugins>
-        <!-- 项目名称 -->
-<!--        <finalName>community</finalName>-->
+<!--         项目名称-->
+        <finalName>community</finalName>
     </build>
 
 </project>

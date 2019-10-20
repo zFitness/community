@@ -4,7 +4,7 @@ spring:
     # 8.0 的驱动使用cj的那个驱动
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 数据库地址， useSSL: 不使用安全套接字   serverTimeZone: 时区
-    url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: wwwpsxiaoji
 
@@ -12,7 +12,7 @@ spring:
 # github OAuth 配置
 github:
   client:
-    id: ee34371940f933c1bb71
-    secret: ee8deddf90a56d7ea4e1a1e79f922f1089e38dfa
+    id: 3fb7925ca6ea019aed64
+    secret: cf43f01fac54c7c6bbd86d0d4ddb85be5c513036
   redirect:
     uri: http://zmblog.wang/community/callback

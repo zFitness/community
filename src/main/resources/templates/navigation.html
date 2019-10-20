@@ -54,7 +54,11 @@
                         <h4 class="modal-title" id="myModalLabel">登录方式</h4>
                       </div>
                       <div class="modal-body">
-                        <a href="https://github.com/login/oauth/authorize?client_id=3fb7925ca6ea019aed64&redirect_uri=http://localhost:8887/callback&scope=user&state=1"
+<!--                        <span th:text="${#httpServletRequest.getContextPath()}"></span>-->
+<!--                        <a href="https://github.com/login/oauth/authorize?client_id=3fb7925ca6ea019aed64&redirect_uri=http://localhost:8887/callback&scope=user&state=1"-->
+<!--                           th:href="@{/profile/{section}/(page=${1}, section=${section})}"`-->
+                        <a th:href="@{https://github.com/login/oauth/authorize/(client_id='3fb7925ca6ea019aed64',
+                                redirect_uri=${#httpServletRequest.getRequestURL() + 'callback'}, scope='user', state=1)}"
                            class="btn btn-danger">github登录</a>
                         <a href="login" th:href="@{/login}" type="button" class="btn btn-primary">普通登录</a>
                         <a href="#" type="button" class="btn btn-success" th:href="@{/login}">注册</a>
