@@ -4,7 +4,7 @@ spring:
     # 8.0 的驱动使用cj的那个驱动
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 数据库地址， useSSL: 不使用安全套接字   serverTimeZone: 时区
-    url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC
     username: root
     password: wwwpsxiaoji
 

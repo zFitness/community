@@ -1,12 +1,18 @@
 # 开发环境的数据源
+#spring:
+#  # 数据库源配置
+#  datasource:
+#    url: jdbc:h2:~/communtiy
+#    username: sa
+#    password: 123
+#    driver-class-name: org.h2.Driver
 spring:
   # 数据库源配置
   datasource:
-    url: jdbc:h2:~/communtiy
-    username: sa
-    password: 123
-    driver-class-name: org.h2.Driver
-
+    url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC
+    username: root
+    password: 131452
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 # github OAuth 配置
 github:

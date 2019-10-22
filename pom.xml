@@ -98,15 +98,15 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.0.4</version>
                 <configuration>
-                    <url>jdbc:h2:~/communtiy</url>
-                    <user>sa</user>
-                    <password>123</password>
+                    <url>jdbc:mysql://localhost:3306/community?serverTimezone=UTC</url>
+                    <user>root</user>
+                    <password>131452</password>
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.197</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.17</version>
                     </dependency>
                 </dependencies>
             </plugin>
